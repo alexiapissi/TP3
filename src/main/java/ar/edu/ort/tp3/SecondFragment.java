@@ -1,6 +1,7 @@
 package ar.edu.ort.tp3;
 
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -21,6 +22,7 @@ public class SecondFragment extends Fragment {
     ArrayList<Jugada> listajugadas;
     ListView listVW;
     ScoreAdapter adapter;
+
 
     public SecondFragment() {
         // Required empty public constructor
@@ -55,6 +57,9 @@ public class SecondFragment extends Fragment {
             case R.id.nav_delete:
                 Log.d("Delete", "ison");
                 listajugadas.clear();
+                MainActivity ma = (MainActivity)getActivity();
+                SQLiteDatabase basedatos= ma.getBasedatos();
+                basedatos.delete("jugadas","",null);
                 adapter.notifyDataSetChanged();
                 adapter = new ScoreAdapter(getContext(),listajugadas);
                 break;

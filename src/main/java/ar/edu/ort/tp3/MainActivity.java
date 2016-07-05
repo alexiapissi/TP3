@@ -1,5 +1,6 @@
 package ar.edu.ort.tp3;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private String userName="";
     private TextView navUserName;
     ArrayList<Jugada> listajugadas;
+    baseTP3SQLiteHelper accesobase;
+    SQLiteDatabase basedatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +36,27 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         inicializarToolbar(); // Setear Toolbar como action bar
         inicializarTabs(); // Crear los tabs
+        if (!initBase()){
+            Toast toast = Toast.makeText(this, "Error accediendo a Base de Datos", Toast.LENGTH_SHORT);
+            toast.show();
+        }
         listajugadas = new ArrayList<>();
     }
+    boolean initBase(){
+        Boolean responder;
+        accesobase=new baseTP3SQLiteHelper(this, "baseTP3", null,1);
+        basedatos=accesobase.getWritableDatabase();
+        if(basedatos != null){
+            responder =true;
+        }else{
+            responder =false;
+        }
+        return responder;
+    }
 
+    public SQLiteDatabase getBasedatos(){
+        return basedatos;
+    }
     public ArrayList<Jugada> getListajugadas() {
         return listajugadas;
     }

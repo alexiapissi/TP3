@@ -1,5 +1,7 @@
 package ar.edu.ort.tp3;
 import android.app.Application;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -177,6 +179,15 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             MainActivity ma = (MainActivity)getActivity();
             Jugada j = new Jugada(ma.getUserName(),secuencia,clicks);
             listajugadas.add(j);
+           SQLiteDatabase basedatos= ma.getBasedatos();
+
+            ContentValues nuevoRegistro;
+            nuevoRegistro=new ContentValues();
+            nuevoRegistro.put("username", j.getUsername());
+            nuevoRegistro.put("secuencia", j.getSecuencia());
+            nuevoRegistro.put("jugada", j.getJugada());
+            basedatos.insert("jugadas",null,nuevoRegistro);
+            basedatos.close();
         }
     }
 }
