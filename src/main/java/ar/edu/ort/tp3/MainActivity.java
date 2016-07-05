@@ -1,5 +1,6 @@
 package ar.edu.ort.tp3;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -41,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
         listajugadas = new ArrayList<>();
+        Cursor conjuntoDeRegistros;
+        conjuntoDeRegistros=basedatos.rawQuery("select username, secuencia, jugada from jugadas", null);
+        if(conjuntoDeRegistros.moveToFirst()== true){
+            int cantidadRegistros=0;
+            do{
+                cantidadRegistros++;
+                Jugada j = new Jugada(conjuntoDeRegistros.getString(0),conjuntoDeRegistros.getString(1),conjuntoDeRegistros.getInt(2));
+                listajugadas.add(j);
+            } while (conjuntoDeRegistros.moveToNext() == true);
+        }
     }
     boolean initBase(){
         Boolean responder;
@@ -77,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Verde));
                 break;
             case 3:
-                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Fucsia));
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Rosa));
                 break;
             case 4:
                 tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Celeste));

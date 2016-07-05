@@ -187,7 +187,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             nuevoRegistro.put("secuencia", j.getSecuencia());
             nuevoRegistro.put("jugada", j.getJugada());
             basedatos.insert("jugadas",null,nuevoRegistro);
-            basedatos.close();
         }
     }
 }

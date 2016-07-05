@@ -42,7 +42,7 @@ public class ColoresDialog extends DialogFragment {
         colores.add("Rojo");
         colores.add("Azul");
         colores.add("Verde");
-        colores.add("Fucsia");
+        colores.add("Rosa");
         colores.add("Celeste");
 
 
