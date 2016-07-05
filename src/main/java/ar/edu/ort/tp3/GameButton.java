@@ -33,7 +33,7 @@ public class GameButton extends ImageButton {
         if(checked) {
             this.setImageResource(R.drawable.ic_location_on_black_24dp);
         }else{
-            this.setImageResource(R.drawable.ic_color_lens_black_24dp);
+            this.setImageResource(R.drawable.ic_android_black_24dp);
         }
     }
 

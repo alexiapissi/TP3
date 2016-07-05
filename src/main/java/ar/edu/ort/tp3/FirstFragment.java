@@ -171,7 +171,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 break;
         }
         if ((btn1.checked == true && btn2.checked == true && btn3.checked == true && btn4.checked == true && btn5.checked == true && btn6.checked == true && btn7.checked == true && btn8.checked == true && btn9.checked == true) || (btn1.checked == false && btn2.checked == false && btn3.checked == false && btn4.checked == false && btn5.checked == false && btn6.checked == false && btn7.checked == false && btn8.checked == false && btn9.checked == false)) {
-            Toast toast = Toast.makeText(getActivity(), "¡Ganaste!", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getActivity(), "¡Ganaste! Movimientos: " + clicks, Toast.LENGTH_SHORT);
             toast.show();
             ganaste=1;
             MainActivity ma = (MainActivity)getActivity();

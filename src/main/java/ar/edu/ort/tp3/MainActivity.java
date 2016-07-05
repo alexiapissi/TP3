@@ -1,5 +1,6 @@
 package ar.edu.ort.tp3;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -42,6 +43,25 @@ public class MainActivity extends AppCompatActivity {
         this.listajugadas = listajugadas;
     }
 
+    public void setColor(int color){
+        switch (color){
+            case 0:
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Rojo));
+                break;
+            case 1:
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Azul));
+                break;
+            case 2:
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Verde));
+                break;
+            case 3:
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Fucsia));
+                break;
+            case 4:
+                tabHost.getTabContentView().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.Celeste));
+                break;
+        }
+    }
 
 
     private void inicializarToolbar() {
@@ -79,11 +99,13 @@ public class MainActivity extends AppCompatActivity {
                 switch(item.getItemId()) {
                     case R.id.nav_background:
                         Log.d("Choose:","Background");
-                        tabHost.setCurrentTab(0);
+                        FragmentManager fm = getSupportFragmentManager();
+                        ColoresDialog coloresDialog = new ColoresDialog();
+                        coloresDialog.show(fm, "fragment_colores");
                         break;
                     case R.id.nav_user:
                         Log.d("Choose:","Send");
-                        FragmentManager fm = getSupportFragmentManager();
+                        fm = getSupportFragmentManager();
                         UserNameDialog userNameDialog = new UserNameDialog();
                         userNameDialog.show(fm, "fragment_edit_name");
                         break;
