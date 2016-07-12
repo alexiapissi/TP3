@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -78,21 +79,24 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         switch (item.getItemId()) {
             case R.id.nav_replay:
                 Log.d("Replay", "ison");
-                secuencia="";
-                clicks=0;
-                ganaste=0;
-                btn1.reset();
-                btn2.reset();
-                btn3.reset();
-                btn4.reset();
-                btn5.reset();
-                btn6.reset();
-                btn7.reset();
-                btn8.reset();
-                btn9.reset();
+                reiniciar();
                 break;
         }
         return true;
+    }
+    public void reiniciar (){
+        //secuencia="";
+        //clicks=0;
+        //ganaste=0;
+        btn1.reset();
+        btn2.reset();
+        btn3.reset();
+        btn4.reset();
+        btn5.reset();
+        btn6.reset();
+        btn7.reset();
+        btn8.reset();
+        btn9.reset();
     }
 
     @Override
@@ -173,8 +177,13 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 break;
         }
         if ((btn1.checked == true && btn2.checked == true && btn3.checked == true && btn4.checked == true && btn5.checked == true && btn6.checked == true && btn7.checked == true && btn8.checked == true && btn9.checked == true) || (btn1.checked == false && btn2.checked == false && btn3.checked == false && btn4.checked == false && btn5.checked == false && btn6.checked == false && btn7.checked == false && btn8.checked == false && btn9.checked == false)) {
-            Toast toast = Toast.makeText(getActivity(), "¡Ganaste! Movimientos: " + clicks, Toast.LENGTH_SHORT);
-            toast.show();
+            //Toast toast = Toast.makeText(getActivity(), "¡Ganaste! Movimientos: " + clicks, Toast.LENGTH_SHORT);
+            //toast.show();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            GanasteDIalog ganasteDIalog = new GanasteDIalog();
+            ganasteDIalog.set_clicks(clicks);
+            ganasteDIalog.setTargetFragment(this,0);
+            ganasteDIalog.show(fm, "fragment_ganaste");
             ganaste=1;
             MainActivity ma = (MainActivity)getActivity();
             Jugada j = new Jugada(ma.getUserName(),secuencia,clicks);
@@ -187,6 +196,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             nuevoRegistro.put("secuencia", j.getSecuencia());
             nuevoRegistro.put("jugada", j.getJugada());
             basedatos.insert("jugadas",null,nuevoRegistro);
+            secuencia="";
+            clicks=0;
+            ganaste=0;
         }
     }
 }

@@ -52,8 +52,8 @@ public class ScoreAdapter extends BaseAdapter {
 
         Jugada j = jugadas.get(position);
         usernameTV.setText(String.valueOf(j.getUsername()));
-        secuenciaTV.setText(j.getSecuencia());
-        jugadaTV.setText(String.valueOf(j.getJugada()));
+        secuenciaTV.setText("Secuencia: "+j.getSecuencia());
+        jugadaTV.setText("Jugadas: "+String.valueOf(j.getJugada()));
         return view;
     }
 }
