@@ -85,9 +85,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         return true;
     }
     public void reiniciar (){
-        //secuencia="";
-        //clicks=0;
-        //ganaste=0;
+        secuencia="";
+        clicks=0;
+        ganaste=0;
         btn1.reset();
         btn2.reset();
         btn3.reset();
@@ -198,7 +198,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             basedatos.insert("jugadas",null,nuevoRegistro);
             secuencia="";
             clicks=0;
-            ganaste=0;
         }
     }
 }
